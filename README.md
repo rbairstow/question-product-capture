@@ -1,2 +1,58 @@
-# question-product-capture
+# Get product details
 Capture product details within the question.liquid form
+
+Add the following within your question.liquid form 
+
+```html
+{% form 'contact' %}
+{% if form.posted_successfully? %}
+  <div class="successForm feedback">
+    <p>{{ 'contact.form.post_success' | t }}</p>
+  </div>
+{% endif %}
+
+{% if form.errors %}
+  <div class="errorForm feedback">
+    <p>{{ 'general.forms.post_error' | t }}</p>
+  </div>
+{% endif %}
+
+<div id="contactFormWrapper">
+  <div class="desktop-4 mobile-3">
+    <p>
+      <label>{{ 'contact.form.name' | t }}</label>
+      <input type="text" id="contactFormName" name="contact[name]"
+      placeholder="{{ 'contact.form.name' | t }}" />
+    </p>
+  </div>
+  <div class="desktop-4 mobile-3">
+    <p>
+      <label>{{ 'contact.form.email' | t }}</label>
+      <input type="email" id="contactFormEmail" name="contact[email]"
+      placeholder="{{ 'contact.form.email' | t }}" />
+    </p>
+  </div>
+  <div class="desktop-4 mobile-3">
+    <p>
+      <label>{{ 'contact.form.phone' | t }}</label>
+      <input type="text" id="contactFormTelephone" name="contact[phone]"
+      placeholder="{{ 'contact.form.phone' | t }}" />
+    </p>
+  </div>
+  <div class="desktop-12 mobile-3">
+    <p>
+      <label>{{ 'contact.form.message' | t }}</label>
+      <textarea rows="15" cols="90" id="contactFormMessage"
+      name="contact[body]" placeholder="{{ 'contact.form.message' | t
+      }}"></textarea>
+    </p>
+    <p>
+      <input type="hidden" name="contact[product]" value="{{product.title}}">
+      <input type="hidden" name="contact[producturl]" value="{{ shop.url}}/{{product.url}}">
+      <input type="submit" id="contactFormSubmit" class="secondary button"
+      value="{{ 'contact.form.send' | t }}" />
+    </p>
+  </div>
+</div>
+{% endform %}
+```
